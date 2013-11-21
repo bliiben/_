@@ -1,5 +1,7 @@
 Options +FollowSymlinks
 RewriteEngine on
 
+RewriteRule ^.*/global/(.*) global/$1
+
 RewriteRule ^index.php/([^global][A-z0-9.-]*)/([A-z0-9.-]*) index.php?module=$1&action=$2 [L,QSA]
 RewriteRule ^([^global][A-z0-9.-]*)/([A-z0-9.-]*) index.php?module=$1&action=$2 [L,QSA]
