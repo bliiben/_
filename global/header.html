@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- VUE PRINCIPALE -->
+<html>
+<head>
+	<title>Base</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script type="text/javascript" src="global/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="global/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="global/css/design.css">
+</head>
+<body>
+	<header class="firstTitle">
+		<div class="container">
+			<div class="col-md-7 col-sm-7">
+				<span class="titre"> Dwarves vs Zombies</span>
+			</div>
+		</div>
+	</header>
+<?php
+	if(!$userConnecte)
+	{
+		include(MENUHEADER);
+	}
+?>
+<div class="container">
+	<div class="bodySite">

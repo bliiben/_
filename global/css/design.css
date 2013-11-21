@@ -1,0 +1,32 @@
+.firstTitle{
+	background: #e40;
+	height: 100px;
+	color:#eee;
+	padding-top: 20px;
+}
+.other{
+	background: red;
+}
+.titre
+{
+	font-size: 35px;
+}
+footer
+{
+	background: #333;
+	border-top: #eef 1px solid;
+	color:#CCC;
+	min-height: 100px;
+}
+.centeredText
+{
+	text-align: center;
+}
+.bodySite
+{
+	min-height: 349px;
+}
+#formulaire_connexion
+{
+	text-align: right;
+}

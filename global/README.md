@@ -1,0 +1,1 @@
+This directory contains the global content such as JS, CSS, images.. That can be accessed by a user.
