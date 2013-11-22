@@ -14,6 +14,7 @@ class User
 	
 	function formulaireInscription()
 	{
+		$GLOBALS['CODEMENU'] = 4;
 		include(HEADER);
 		include(V."formulaireInscription.php");
 		include(FOOTER);
