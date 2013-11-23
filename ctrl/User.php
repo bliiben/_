@@ -4,12 +4,15 @@
 */
 class User
 {
-	private $PDO;
+	private $PDO,$userManager;
 	function __construct()
 	{
 		//May load Engine Classes
 		global $PDO;
 		$this->PDO = $PDO;
+		
+		require M."UserGRUD.php";
+		$this->userManager = new UserGRUD();
 	}
 	
 	function formulaireInscription()
@@ -22,17 +25,15 @@ class User
 	function inscriptionUser()
 	{
 		global $ERRORS;
-		require M."inscriptionUser.php";
-		$userManager = new UserGRUD();
 		try {
 			if( isset($_POST['pseudo']) && !empty($_POST['pseudo']) && isset($_POST['password1']) && !empty($_POST['password1']) && isset($_POST['password2']) && !empty($_POST['password2'])){
 				
 				if( strlen($_POST['pseudo']) > TAILLE_PSEUDO )
-					throw new Exception("Le nombre de caractère du pseudo ne peut pas excéder 20 caractères", 1);
+					throw new Exception("Le nombre de caractÃ¨re du pseudo ne peut pas excÃ©der 20 caractÃ¨res", 1);
 				if( strlen($_POST['firstname']) > TAILLE_FIRSTNAME )
-					throw new Exception("Le nombre de caractère du prénom ne peut pas excéder 20 caractères", 1);
+					throw new Exception("Le nombre de caractÃ¨re du prÃ©nom ne peut pas excÃ©der 20 caractÃ¨res", 1);
 				if( strlen($_POST['lastname']) > TAILLE_LASTNAME )
-					throw new Exception("Le nombre de caractère du nom ne peut pas excéder 20 caractères", 1);
+					throw new Exception("Le nombre de caractÃ¨re du nom ne peut pas excÃ©der 20 caractÃ¨res", 1);
 
 				$pseudo = $_POST['pseudo'];
 				$password1 = $_POST['password1'];
@@ -45,11 +46,11 @@ class User
 					throw new Exception("Les mots de passe ne sont pas identiques", 1);
 
 				if(strlen($password2) <= 5)
-					$ERRORS[]=new Error("Le mot de passe est court. A vos risques et périls !","warning");
+					$ERRORS[]=new Error("Le mot de passe est court. A vos risques et pÃ©rils !","warning");
 
-				$userManager->inscrireUser($pseudo,$password1,$firstname,$lastname,$email );
+				$this->userManager->inscrireUser($pseudo,$password1,$firstname,$lastname,$email );
 
-				$ERRORS[] = new Error("Vous êtes inscrit ! ","success");
+				$ERRORS[] = new Error("Vous Ãªtes inscrit ! ","success");
 
 			}else
 				throw new Exception("Il manque des informations pour vous inscrire.", 1);
@@ -57,7 +58,36 @@ class User
 		} catch (Exception $e) {
 			$ERRORS[]=new Error($e->getMessage());
 		}
-		//On ré affiche le formulaire
+		//On rÃ© affiche le formulaire
 		$this->formulaireInscription();
+	}
+	function formulaireConnexion()
+	{
+		$GLOBALS['CODEMENU']=5;
+		include(HEADER);
+		include(V."formulaireConnexion.php");
+		include(FOOTER);
+	}
+	function connexionUser()
+	{
+		$uuid = uniqid("",true);
+		global $ERRORS;
+		if( isset($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['pseudo']) && !empty($_POST['password']) )
+		{
+			$result = $this->userManager->connexionUser($_POST['pseudo'],$_POST['password']);
+			if(!$result)
+			{
+				$ERRORS[]=new Error("La connexion est impossible. Pseudo ou mot de passe Ã©rronÃ©e");
+			}
+		}
+		else
+		{
+			$ERRORS[]=new Error("ParamÃ¨tres manquant pour la connexion");
+		}
+		$this->formulaireConnexion();
+	}
+	function connexionByUUID()
+	{
+
 	}
 }

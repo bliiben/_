@@ -3,9 +3,5 @@ RewriteEngine on
 
 RewriteRule ^.*/global/(.*) global/$1
 
-RewriteRule ^index.php/([^global][A-z0-9.-]*)/([A-z0-9.-]*) index.php?module=$1&action=$2 [L,QSA]
-RewriteRule ^([^global][A-z0-9.-]*)/([A-z0-9.-]*) index.php?module=$1&action=$2 [L,QSA]
-
-RewriteRule ^index.php index.php?module=accueil&action=presentation
-
-ErrorDocument 404 index.php?module=error&action=e404
+RewriteRule ^index.php/(?!global)(.*?)/(.*?)/?$ index.php?module=$1&action=$2 [L,QSA]
+RewriteRule ^(?!global)(.*?)/(.*?)/?$ index.php?module=$1&action=$2 [L,QSA]

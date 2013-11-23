@@ -15,7 +15,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputInscriptionRptPassword" class="col-sm-3 control-label">Répéter le mot de passe *</label>
+				<label for="inputInscriptionRptPassword" class="col-sm-3 control-label">RÃ©pÃ©ter le mot de passe *</label>
 				<div class="col-sm-9">
 					<input type="password" name="password2" class="form-control" id="inputInscriptionRptPassword" placeholder="Password">
 				</div>
@@ -48,8 +48,8 @@
 	<div class="col-sm-3">
 		<h2>Politique</h2>
 		<blockquote>
-			Nous garderons vos informations secrètes.<br />
-			Votre adresse e-mail ne seras <b>PAS publié</b>. Nous nous en servirons pour vous avertir des publications, des notifications et des messages privé.
+			Nous garderons vos informations secrÃ¨tes.<br />
+			Votre adresse e-mail ne seras <b>PAS publiÃ©</b>. Nous nous en servirons pour vous avertir des publications, des notifications et des messages privÃ©.
 		</blockquote>
 	</div>
 </div>
