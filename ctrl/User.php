@@ -70,24 +70,49 @@ class User
 	}
 	function connexionUser()
 	{
-		$uuid = uniqid("",true);
 		global $ERRORS;
 		if( isset($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['pseudo']) && !empty($_POST['password']) )
 		{
 			$result = $this->userManager->connexionUser($_POST['pseudo'],$_POST['password']);
-			if(!$result)
-			{
+			//Résult === idUser | false
+			if($result!==false){
+				$ERRORS[]=new Error("Connexion réussi","success");
+				//Si l'user veut une connexion automatique
+				if(isset($_POST['connect_auto']) && $_POST['connect_auto']=='on' )
+				{
+					
+					//Save the uuid in the data base
+					$this->userManager->registerUUIDToUser($_POST['pseudo']);
+					//Save the session
+					$this->saveUserInSession( $result );
+				}
+				//Redirection sur la page perso de l'user
+				//ici ( Quand ça sera fait )
+				$this->formulaireConnexion();//To remove
+
+			}
+			else{
 				$ERRORS[]=new Error("La connexion est impossible. Pseudo ou mot de passe érronée");
+				$this->formulaireConnexion();
 			}
 		}
 		else
 		{
 			$ERRORS[]=new Error("Paramètres manquant pour la connexion");
+			$this->formulaireConnexion();
 		}
-		$this->formulaireConnexion();
 	}
-	function connexionByUUID()
+	//Connect the user with the uuid
+	public function connexionByUUID()
 	{
-
+		if(($idUser = $this->userManager->connexionByUUID()) !== false)
+		{
+			$this->saveUserInSession($idUser);
+		}
+	}
+	
+	private function saveUserInSession($idUser)
+	{
+		$this->userManager->saveUserInSession($idUser);
 	}
 }
