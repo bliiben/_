@@ -75,11 +75,11 @@ class UserGRUD
 	}
 	public function deconnexion()
 	{
-		if(isset($_SESSION['idUser']) && isset($_SESSION['connexionByUUID']))
+		if($GLOBALS['USERCONNECTE'])
 		{
 			if($_SESSION['connexionByUUID'])
 			{
-				//supprime ça car il s'être connecté par uuid
+				//supprime sa connection auto car il s'être connecté par uuid
 				$this->PDO->exec("UPDATE user SET uuid='' WHERE idUser=$idUser ");
 			}
 			session_destroy();

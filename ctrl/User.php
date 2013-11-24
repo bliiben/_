@@ -70,7 +70,7 @@ class User
 	}
 	function connexionUser()
 	{
-		global $ERRORS;
+		global $ERRORS,$USERCONNECTE;
 		if( isset($_POST['pseudo']) && isset($_POST['password']) && !empty($_POST['pseudo']) && !empty($_POST['password']) )
 		{
 			$result = $this->userManager->connexionUser($_POST['pseudo'],$_POST['password']);
@@ -84,10 +84,11 @@ class User
 					//Save the uuid in the data base
 					$this->userManager->registerUUIDToUser($_POST['pseudo']);
 					//Save the session
-					$this->saveUserInSession( $result );
 				}
 				//Redirection sur la page perso de l'user
 				//ici ( Quand ça sera fait )
+				$this->saveUserInSession( $result );
+				$USERCONNECTE=true;
 				$this->formulaireConnexion();//To remove
 
 			}
@@ -114,5 +115,14 @@ class User
 	private function saveUserInSession($idUser)
 	{
 		$this->userManager->saveUserInSession($idUser);
+	}
+
+	public function deconnexion(){
+		global $ERRORS,$USERCONNECTE;
+		$this->userManager->deconnexion();
+		$USERCONNECTE=false;
+		$ERRORS[]=new Error("Déconnexion éffectué","success");
+		$this->formulaireConnexion();
+
 	}
 }

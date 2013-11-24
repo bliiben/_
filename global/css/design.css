@@ -16,7 +16,7 @@ footer
 	background: #333;
 	border-top: #eef 1px solid;
 	color:#CCC;
-	min-height: 100px;
+	min-height: 200px;
 	margin-top:25px;
 }
 .centeredText
@@ -25,7 +25,7 @@ footer
 }
 .bodySite
 {
-	min-height: 349px;
+	min-height: 600px;
 }
 #formulaire_connexion
 {

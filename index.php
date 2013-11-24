@@ -16,6 +16,9 @@ require "classe/Error.class.php";
 	$ERRORS=array();
 	//CODE MENU
 	$CODEMENU = 0;
+	//User connecté ?
+	$USERCONNECTE = isset($_SESSION['idUser']);
+
 try{
 	if (!( isset( $_GET['action']) && isset( $_GET['module']) && !empty($_GET['module']) && !empty($_GET['action'])))
 	{

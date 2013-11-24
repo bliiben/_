@@ -19,9 +19,28 @@
 	</header>
 <?php
 	include(MENUHEADER);
+
 ?>
+
+
 <div class="container">
 	<div class="bodySite">
 <?php
 	include(ERRORMANAGER);
+
+//Si il est connecté on affiche le menu perso:
+if($GLOBALS['USERCONNECTE'])//Connecté ?
+{
+	?>
+	<div class="row">
+		<div class="col-sm-2">
+			<?php include(MENUPERSO); ?>
+		</div>
+		<div class="col-sm-10">
+
+	<?php
+
+	//Continue jusqu'au footer
+}
+
 ?>
