@@ -20,6 +20,11 @@ require "classe/Error.class.php";
 	$USERCONNECTE = isset($_SESSION['idUser']);
 
 try{
+	//Try to connect the user by uuid
+	if( ! $USERCONNECTE && ( ( isset($_SESSION['tried']) && $_SESSION['tried'] != false ) || !isset($_SESSION['tried']) ) )
+	{
+		new Road("user","connexionByUUID");
+	}
 	if (!( isset( $_GET['action']) && isset( $_GET['module']) && !empty($_GET['module']) && !empty($_GET['action'])))
 	{
 		if( ! isset( $_GET['action']) && ! isset( $_GET['module']) )
@@ -41,5 +46,4 @@ try{
 	include(HEADER);
 	include(FOOTER);
 }
-
 ob_end_flush();

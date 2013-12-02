@@ -33,7 +33,7 @@
 
 			<div class="col-sm-6">
 				<div class="thumbnail">
-					<img src="http://dummyimage.com/200x200/c2c2c2/ffffff.png&amp;text=logo" alt="...">
+					<img src="http://www.mystarbake.com/wp-content/uploads/2013/01/image_blend-pizza_classique-francaise.jpg" alt="...">
 					<div class="caption">
 						<h3>Vivinci project</h3>
 						<p>Projet concernant les ticket de péages et les avions à sens unique !</p>

@@ -15,3 +15,5 @@ define("DB_PASSWORD", "");
 define("TAILLE_PSEUDO", 20);
 define("TAILLE_FIRSTNAME", 20);
 define("TAILLE_LASTNAME", 20);
+define("TAILLEBDUUID", 23);
+

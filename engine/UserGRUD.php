@@ -38,7 +38,7 @@ class UserGRUD
 		return false;
 	}
 	//@return idUser of the pseudo
-	//Not use atm
+	//Not used atm
 	public function getIdOf($pseudo)
 	{
 		$st = $this->PDO->prepare("SELECT idUser FROM user WHERE pseudo=?");
@@ -57,18 +57,21 @@ class UserGRUD
 		setcookie("pseudo",$_POST['pseudo'],time()+7*3600*24,'/');
 
 		$st=$this->PDO->prepare("UPDATE user set uuid=:uuid WHERE pseudo=:pseudo");
-		$st->execute(array('pseudo'=>$pseudo,'uuid'=>$uuid));
+		$st->execute(array('pseudo'=>$pseudo,'uuid'=>crypt($uuid)));
 
 	}
-	//Return true if user can connect
+	//Return true if user can connect by uuid
 	public function connexionByUUID()
 	{
 		$_SESSION['connexionByUUID'] = true;
 		if(isset($_COOKIE['uuid']) && isset($_COOKIE['pseudo'])){
-			$st = $this->PDO->prepare("SELECT idUser FROM user WHERE pseudo=:pseudo AND uuid=:uuid ");
-			$st->execute(array("pseudo"=>$_COOKIE['pseudo'],"uuid"=>$_COOKIE['uuid']));
+			$st = $this->PDO->prepare("SELECT idUser,uuid FROM user WHERE pseudo=:pseudo ");
+			$st->execute(array("pseudo"=>$_COOKIE['pseudo']));
 			while($d=$st->fetch()){
-				return $d['idUser'];
+				if( (substr(crypt($_COOKIE['uuid'],$d['uuid']),0,TAILLEBDUUID) == $d['uuid'] ) )
+				{
+					return $d['idUser'];
+				}
 			}
 		}
 		return false;

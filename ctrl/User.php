@@ -106,8 +106,10 @@ class User
 	//Connect the user with the uuid
 	public function connexionByUUID()
 	{
+		global $USERCONNECTE;
 		if(($idUser = $this->userManager->connexionByUUID()) !== false)
 		{
+			$USERCONNECTE=true;
 			$this->saveUserInSession($idUser);
 		}
 	}
