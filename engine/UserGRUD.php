@@ -19,10 +19,10 @@ class UserGRUD
 		$st = $this->PDO->prepare("INSERT INTO user SET pseudo=:pseudo,password=:password,email=:email,firstname=:firstname,lastname=:lastname");
 
 		$st->execute(array(	'pseudo'=> $pseudo
-									,'password'=> crypt($password)
-									,'email'=> $email
-									,'firstname'=> $firstname
-									,'lastname'=> $lastname
+							,'password'=> crypt($password)
+							,'email'=> $email
+							,'firstname'=> $firstname
+							,'lastname'=> $lastname
 							));
 	}
 	/* Return the idUser if the pseudo ant password are good else false */

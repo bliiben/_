@@ -21,9 +21,11 @@ require "classe/Error.class.php";
 
 try{
 	//Try to connect the user by uuid
+	//do it once when the user come
 	if( ! $USERCONNECTE && ( ( isset($_SESSION['tried']) && $_SESSION['tried'] != false ) || !isset($_SESSION['tried']) ) )
 	{
 		new Road("user","connexionByUUID");
+		$_SESSION['tried']=true;
 	}
 	if (!( isset( $_GET['action']) && isset( $_GET['module']) && !empty($_GET['module']) && !empty($_GET['action'])))
 	{
