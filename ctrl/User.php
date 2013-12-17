@@ -11,7 +11,10 @@ class User
 		global $PDO;
 		$this->PDO = $PDO;
 		
-		require M."UserGRUD.php";
+		//If the class is already defined we don't require his file
+		if(!class_exists('UserGRUD'))
+			require M."UserGRUD.php";
+
 		$this->userManager = new UserGRUD();
 	}
 	
