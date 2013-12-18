@@ -9,6 +9,7 @@ ob_start();
 require "define.php";
 require "classe/Road.class.php";
 require "classe/Error.class.php";
+require "classe/Test.interface.php";
 //Global variable
 	//Data base
 	$PDO=new PDO('mysql:host=localhost;dbname='.DB_NAME,DB_USERNAME,DB_PASSWORD);
