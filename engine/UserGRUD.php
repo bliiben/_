@@ -3,7 +3,7 @@
 /**
 * GRUD user
 */
-class UserGRUD
+class UserGRUD implements Test
 {
 	private $PDO;
 	function __construct()
@@ -11,7 +11,11 @@ class UserGRUD
 		global $PDO;
 		$this->PDO = $PDO;
 	}
-
+	public function testClass(){
+		if( ! strlen(crypt("mdp","salt"))==13 ){
+			echo "Warning crypt(mdp) != 13";
+		}
+	}
 	public function inscrireUser($pseudo,$password,$firstname,$lastname,$email )
 	{
 		global $ERRORS;
