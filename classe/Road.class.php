@@ -1,6 +1,7 @@
 <?php
 /**
-* Road
+* class Road
+* To find classes names : \n[ \t]{0,}class (.*?)(extends|implements)?[\n\{]
 */
 class Road
 {

@@ -15,6 +15,7 @@ class UserGRUD implements Test
 		if( ! strlen(crypt("mdp","salt"))==13 ){
 			echo "Warning crypt(mdp) != 13";
 		}
+		print_r(self::generateSalt());
 	}
 	public function inscrireUser($pseudo,$password,$firstname,$lastname,$email )
 	{
@@ -28,6 +29,39 @@ class UserGRUD implements Test
 							,'firstname'=> $firstname
 							,'lastname'=> $lastname
 							));
+	}
+	//Crypt something
+	public static function cryptSomething($something){
+		$µ='';
+		foreach (str_split($something,8) as $partOfSomething) {
+			$salt = self::generateSalt();
+			$µ .= crypt($partOfSomething,$salt);
+		}
+		return $µ;
+	}
+	public static function cryptIsEqualWith($something,$theCrypt){
+		//Create chunk of 8 char with the password and 13 with the key
+		$aMdp = str_split($something,8);
+		$aKey = str_split($theCrypt,13);
+		if( count($aKey) != count($aMdp) )
+			return false;
+		
+		//Compare each chunck
+		for ($i=0; $i < count($aMdp); $i++) { 
+			if( crypt( $aMdp[$i] , $aKey[$i] ) != $aKey[$i] )
+				return false;//If the chunck are not equals
+		}
+		return true;
+	}
+	//return a string of 10 caracter. completly random
+	public static function generateSalt($len=10)
+	{
+		$str="";
+		$characters="AZERTYUIOPQSDFGHJKLMWXCVBNazertyuiopqsdfghjklmwxcvbn1234567890";
+		for ($i=0; $i < $len; $i++) { 
+			$str.=$characters[rand(0,strlen($characters)-1)];
+		}
+		return $str;
 	}
 	/* Return the idUser if the pseudo ant password are good else false */
 	public function connexionUser($pseudo,$password)

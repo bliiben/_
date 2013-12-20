@@ -25,6 +25,9 @@ class User
 		include(V."formulaireInscription.php");
 		include(FOOTER);
 	}
+	public function testClass(){
+		$this->userManager->testClass();
+	}
 	function inscriptionUser()
 	{
 		global $ERRORS;
